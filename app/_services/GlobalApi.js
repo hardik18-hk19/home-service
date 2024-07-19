@@ -25,6 +25,31 @@ const getCategory = async () => {
   return result;
 };
 
+const getBusinessList = async () => {
+  const query = gql`
+    query BusinessList {
+      businessLists {
+        about
+        address
+
+        category {
+          name
+        }
+        contactPerson
+        email
+        images {
+          url
+        }
+        id
+        name
+      }
+    }
+  `;
+  const result = await request(MASTER_URL, query);
+  return result;
+};
+
 export default {
   getCategory,
+  getBusinessList
 };
