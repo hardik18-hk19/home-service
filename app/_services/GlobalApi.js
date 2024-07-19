@@ -51,5 +51,5 @@ const getBusinessList = async () => {
 
 export default {
   getCategory,
-  getBusinessList
+  getBusinessList,
 };
