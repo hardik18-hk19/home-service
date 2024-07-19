@@ -18,9 +18,9 @@ function Hero() {
           placeholder="  Search"
           className="rounded-full md:w-[350px] border outline-0 h-7 ml-1"
         />
-        <Button className="rounded-full h-[35px] w-[35px] flex items-center ">
+        <Button className="rounded-full h-[35px] w-[35px] flex items-center bg-primary ">
           {/* Search is an lucide react icon */}
-          <Search className=" text-white h-4" />
+          <Search className=" text-white h-4 " />
         </Button>
       </div>
     </div>
