@@ -25,6 +25,6 @@ const getCategory = async () => {
   return result;
 };
 
-export default{
-    getCategory
-}
+export default {
+  getCategory,
+};

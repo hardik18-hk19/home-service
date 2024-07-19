@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/@/components/ui/button";
 import Image from "next/image";
 import React from "react";
 
@@ -18,11 +18,10 @@ function Header() {
             About Us
           </h2>
         </div>
-        
       </div>
       <div>
-            <Button>Get Started</Button>
-        </div>
+       <Button className="rounded-sm mt-1 mb-1 p-1.5 text-white text-sm" >Get Started</Button>
+      </div>
     </div>
   );
 }

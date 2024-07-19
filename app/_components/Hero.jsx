@@ -1,5 +1,5 @@
+import { Button } from "@/@/components/ui/button";
 import { Input } from "@/@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import React from "react";
 
@@ -12,12 +12,15 @@ function Hero() {
       </h2>
       <h2 className="text-xl text-gray-400">
         Explore Best Home Service & Repair near you.{" "}
-      </h2>         
+      </h2>
       <div className="mt-4 flex gap-4 items-center">
-        <Input placeholder="Search" className="rounded-full md:w-[350px]" />
-        <Button className="rounded-full h-[46px]">
+        <Input
+          placeholder="  Search"
+          className="rounded-full md:w-[350px] border outline-0 h-7 ml-1"
+        />
+        <Button className="rounded-full h-[35px] w-[35px] flex items-center ">
           {/* Search is an lucide react icon */}
-          <Search className="h-4 w-4" />
+          <Search className=" text-white h-4" />
         </Button>
       </div>
     </div>
