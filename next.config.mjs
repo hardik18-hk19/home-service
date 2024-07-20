@@ -2,17 +2,25 @@
 const nextConfig = {
   reactStrictMode: true,
 };
-import path from 'path';
+import path from "path";
 
 export default {
   images: {
-    domains: ['ap-south-1.graphassets.com',"lh3.googleusercontent.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ap-south-1.graphassets.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "/**",
+      },
+    ],
   },
   webpack: (config) => {
-    config.resolve.alias['@'] = path.resolve(process.cwd());
+    config.resolve.alias["@"] = path.resolve(process.cwd());
     return config;
   },
 };
-
-
-
