@@ -21,9 +21,9 @@ function Header() {
   }, [data]);
 
   return (
-    <div className="p-5 shadow-sm flex justify-between">
+    <div className="p-5 shadow-sm flex justify-between items-center">
       <div className="flex items-center gap-8">
-        <Image src="./logo.svg" alt="" width={150} height={150} />
+        <Image src="./logo.svg" alt="" width={150} height={75} />
         <div className="md:flex items-center gap-6 hidden">
           <h2 className="hover:scale-105 hover:text-primary cursor-pointer">
             Home
