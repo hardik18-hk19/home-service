@@ -62,7 +62,7 @@ function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          <Button className="rounded-sm h-8 p-1.5" onClick={() => signIn("descope")}>
+          <Button className="rounded-sm h-8 p-1.5 text-white" onClick={() => signIn("descope")}>
             Login / Sign Up
           </Button>
         )}

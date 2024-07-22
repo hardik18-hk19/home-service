@@ -32,7 +32,7 @@ function BusinessInfo({ business }) {
             </h2>
           </div>
           <div className="flex flex-col gap-5 items-end">
-            <Button className="mr-5">
+            <Button className="mr-5 text-white p-1">
               <Share className="h-4 w-4 " />
             </Button>
             <h2 className="flex gap-2 text-xl text-primary">

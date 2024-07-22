@@ -101,9 +101,51 @@ const getBusinessById = async (id) => {
   return result;
 };
 
+const createNewBooking = async (
+  businessId,
+  date,
+  time,
+  userEmail,
+  userName
+) => {
+  const mutationQuery =
+    gql`
+    mutation CreateBooking {
+      createBooking(
+        data: {
+          bookingStatus: booked,
+          businessList: { connect: { id: "` +
+    businessId +
+    `" } },
+          date: "` +
+    date +
+    `",
+          time: "` +
+    time +
+    `",
+          userEmail: "` +
+    userEmail +
+    `",
+          userName: "` +
+    userName +
+    `"
+        }
+      ) {
+        id
+      }
+        publishManyBookings(to: PUBLISHED) {
+          count
+       }
+    }
+  `;
+  const result = await request(MASTER_URL, mutationQuery);
+  return result;
+};
+
 export default {
   getCategory,
   getBusinessList,
   getBusinessByCategory,
   getBusinessById,
+  createNewBooking,
 };

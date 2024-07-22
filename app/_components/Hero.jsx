@@ -20,7 +20,7 @@ function Hero() {
         />
         <Button className="rounded-full h-[35px] w-[35px] flex items-center bg-primary ">
           {/* Search is an lucide react icon */}
-          <Search className=" text-white h-4 " />
+          <Search className=" text-white h-4  " />
         </Button>
       </div>
     </div>
