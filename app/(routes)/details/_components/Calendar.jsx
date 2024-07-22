@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const SingleDatePicker = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-
+const SingleDatePicker = ({ selectedDate, setSelectedDate }) => {
   const formatDate = (date) => {
     if (!date) return '';
     const day = String(date.getDate()).padStart(2, '0');

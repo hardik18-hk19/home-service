@@ -10,17 +10,16 @@ import {
   SheetFooter,
 } from "@/@/components/ui/sheet";
 
-import Calendar from "./Calendar";
+import SingleDatePicker from "./Calendar";
 import { Button } from "@/@/components/ui/button";
 import GlobalApi from "../../../_services/GlobalApi";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
-import { getDate } from "date-fns";
 
 function BookingSection({ children, business }) {
-  const [date, setDate] = useState(null); // Updated to null initially
+  const [date, setDate] = useState(null);
   const [timeSlot, setTimeSlot] = useState([]);
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null); // Updated to null initially
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const { data } = useSession();
 
   useEffect(() => {
@@ -30,28 +29,42 @@ function BookingSection({ children, business }) {
   const getTime = () => {
     const timeList = [];
     for (let i = 10; i <= 12; i++) {
-      timeList.push({
-        time: i + ":00 AM",
-      });
-      timeList.push({
-        time: i + ":30 AM",
-      });
+      timeList.push({ time: i + ":00 AM" });
+      timeList.push({ time: i + ":30 AM" });
     }
     for (let i = 1; i <= 6; i++) {
-      timeList.push({
-        time: i + ":00 PM",
-      });
-      timeList.push({
-        time: i + ":30 PM",
-      });
+      timeList.push({ time: i + ":00 PM" });
+      timeList.push({ time: i + ":30 PM" });
     }
     setTimeSlot(timeList);
   };
 
+  const formatDate = (date) => {
+    if (!date) return null;
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${year}-${month}-${day}`; // YYYY-MM-DD format
+  };
+
   const saveBooking = () => {
+    const formattedDate = formatDate(date);
+    if (!formattedDate || !selectedTimeSlot || !data?.user) {
+      toast.error("Please select a date, time slot, and ensure you are logged in.");
+      return;
+    }
+
+    console.log("Booking details:", {
+      businessId: business.id,
+      date: formattedDate,
+      time: selectedTimeSlot,
+      userEmail: data.user.email,
+      userName: data.user.name,
+    });
+
     GlobalApi.createNewBooking(
       business.id,
-      date,
+      formattedDate,
       selectedTimeSlot,
       data.user.email,
       data.user.name
@@ -78,14 +91,11 @@ function BookingSection({ children, business }) {
             </SheetTitle>
             <SheetDescription>
               Date and Time Slot to book a Service
-              {/* Date Picker */}
               <div>
                 <h2 className="mt-5 font-bold mb-2">Select Date</h2>
-                <Calendar onChange={(newDate) => setDate(newDate)} />{" "}
-                {/* Correctly set date */}
+                <SingleDatePicker selectedDate={date} setSelectedDate={setDate} />
               </div>
               <h2 className="my-2 font-bold">Select Time Slot</h2>
-              {/* Time Picker */}
               <div className="grid grid-cols-3 gap-3">
                 {timeSlot.map((item, index) => (
                   <Button
@@ -111,8 +121,8 @@ function BookingSection({ children, business }) {
                     </Button>
                     <Button
                       className="m-2 text-white p-2"
-                      disabled={!selectedTimeSlot && !date}
-                      onClick={saveBooking} // Hook up saveBooking to onClick
+                      disabled={!selectedTimeSlot || !date}
+                      onClick={saveBooking}
                     >
                       Book
                     </Button>
