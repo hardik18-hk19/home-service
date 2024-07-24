@@ -50,10 +50,12 @@ function BookingSection({ children, business }) {
   };
   const getTime = () => {
     const timeList = [];
-    for (let i = 10; i <= 12; i++) {
+    for (let i = 10; i < 12; i++) {
       timeList.push({ time: i + ":00 AM" });
       timeList.push({ time: i + ":30 AM" });
     }
+    timeList.push({ time: "12:00 PM" });
+    timeList.push({ time: "12:30 PM" });
     for (let i = 1; i <= 6; i++) {
       timeList.push({ time: i + ":00 PM" });
       timeList.push({ time: i + ":30 PM" });
@@ -138,7 +140,7 @@ function BookingSection({ children, business }) {
                       selectedTimeSlot === item.time
                         ? "bg-primary text-white"
                         : isSlotBooked(item.time)
-                        ? "text-gray-400 cursor-not-allowed " 
+                        ? "text-gray-400 cursor-not-allowed "
                         : "text-black  hover:bg-primary hover:text-white"
                     }`}
                     onClick={() =>

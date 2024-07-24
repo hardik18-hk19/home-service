@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/@/components/ui/dropdown-menu";
+import Link from "next/link";
 
 function Header() {
   const { data } = useSession();
@@ -25,21 +26,24 @@ function Header() {
       <div className="flex items-center gap-8">
         <Image src="./logo.svg" alt="" width={150} height={75} />
         <div className="md:flex items-center gap-6 hidden">
-          <h2 className="hover:scale-105 hover:text-primary cursor-pointer">
+          <Link
+            href={"/"}
+            className="hover:scale-105 hover:text-primary cursor-pointer"
+          >
             Home
-          </h2>
-          <h2 className="hover:scale-105 hover:text-primary cursor-pointer">
+          </Link>
+          <Link href={"/search/Cleaning"} className="hover:scale-105 hover:text-primary cursor-pointer">
             Services
-          </h2>
+          </Link>
           <h2 className="hover:scale-105 hover:text-primary cursor-pointer">
-            About Us
+            Contact Us
           </h2>
         </div>
       </div>
       <div>
         {data?.user ? (
           <DropdownMenu>
-            <DropdownMenuTrigger asChild >
+            <DropdownMenuTrigger asChild>
               <Image
                 src={data?.user?.image}
                 alt="user"
@@ -54,15 +58,21 @@ function Header() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md transition">
-                My Bookings
+                <Link href={"/myBooking"}>My Bookings </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={()=>signOut()} className="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md transition">
+              <DropdownMenuItem
+                onClick={() => signOut()}
+                className="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md transition"
+              >
                 Log Out
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          <Button className="rounded-sm h-8 p-1.5 text-white" onClick={() => signIn("descope")}>
+          <Button
+            className="rounded-sm h-8 p-1.5 text-white"
+            onClick={() => signIn("descope")}
+          >
             Login / Sign Up
           </Button>
         )}
