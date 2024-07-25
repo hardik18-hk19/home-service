@@ -1,3 +1,5 @@
+import path from 'path';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -15,11 +17,10 @@ const nextConfig = {
       },
     ],
   },
-  webpack: (config) => {
-    const path = require('path');
-    config.resolve.alias["@"] = path.resolve(process.cwd());
+  webpack(config) {
+    config.resolve.alias['@'] = path.resolve(process.cwd());
     return config;
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
