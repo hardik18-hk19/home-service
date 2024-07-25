@@ -1,8 +1,10 @@
-import path from 'path';
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+};
+import path from "path";
+
+export default {
   images: {
     remotePatterns: [
       {
@@ -17,10 +19,8 @@ const nextConfig = {
       },
     ],
   },
-  webpack(config) {
-    config.resolve.alias['@'] = path.resolve(process.cwd());
+  webpack: (config) => {
+    config.resolve.alias["@"] = path.resolve(process.cwd());
     return config;
   },
 };
-
-export default nextConfig;
