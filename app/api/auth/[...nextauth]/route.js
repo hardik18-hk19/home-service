@@ -1,4 +1,4 @@
-import NextAuth from "next-auth/next";
+import NextAuth from "next-auth";
 
 export const authOptions = {
   providers: [
@@ -45,8 +45,8 @@ export const authOptions = {
             {
               headers: { "Content-Type": "application/x-www-form-urlencoded" },
               body: new URLSearchParams({
-                client_id: "P2jTnUl3jDsd7UnKVF2r8hMFevDB",
-                client_secret: "<Descope Access Key>",
+                client_id: process.env.DESCOPE_CLIENT_ID,
+                client_secret: process.env.DESCOPE_CLIENT_SECRET,
                 grant_type: "refresh_token",
                 refresh_token: token.refresh_token,
               }),
@@ -83,5 +83,5 @@ export const authOptions = {
   },
 };
 
-const handler = NextAuth(authOptions);
+const handler = (req, res) => NextAuth(req, res, authOptions);
 export { handler as GET, handler as POST };
