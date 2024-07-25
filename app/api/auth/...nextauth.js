@@ -1,9 +1,9 @@
 import NextAuth from "next-auth";
-import OAuthProvider from "next-auth/providers/oauth";
+
 
 const authOptions = {
   providers: [
-    OAuthProvider({
+    ({
       id: "descope",
       name: "Descope",
       type: "oauth",
