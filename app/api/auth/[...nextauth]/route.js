@@ -1,13 +1,9 @@
 import NextAuth from "next-auth";
-import GitHubProvider from "next-auth/providers/github";
+import OAuthProvider from "next-auth/providers/oauth";
 
-export const authOptions = {
+const authOptions = {
   providers: [
-    GitHubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
-    }),
-    {
+    OAuthProvider({
       id: "descope",
       name: "Descope",
       type: "oauth",
@@ -25,22 +21,15 @@ export const authOptions = {
           image: profile.picture,
         };
       },
-    },
+    }),
   ],
   callbacks: {
     async jwt({ token, account, profile }) {
       if (account) {
-        return {
-          ...token,
-          access_token: account.access_token,
-          expires_at: Math.floor(Date.now() / 1000 + account.expires_in),
-          refresh_token: account.refresh_token,
-          profile: {
-            name: profile?.name,
-            email: profile?.email,
-            image: profile?.picture,
-          },
-        };
+        token.accessToken = account.access_token;
+        token.expires_at = Math.floor(Date.now() / 1000 + account.expires_in);
+        token.refresh_token = account.refresh_token;
+        token.profile = profile;
       } else if (Date.now() < token.expires_at * 1000) {
         return token;
       } else {
@@ -63,30 +52,25 @@ export const authOptions = {
 
           if (!response.ok) throw tokens;
 
-          return {
-            ...token,
-            access_token: tokens.access_token,
-            expires_at: Math.floor(Date.now() / 1000 + tokens.expires_in),
-            refresh_token: tokens.refresh_token ?? token.refresh_token,
-          };
+          token.accessToken = tokens.access_token;
+          token.expires_at = Math.floor(Date.now() / 1000 + tokens.expires_in);
+          token.refresh_token = tokens.refresh_token ?? token.refresh_token;
         } catch (error) {
           console.error("Error refreshing access token", error);
-          return { ...token, error: "RefreshAccessTokenError" };
+          token.error = "RefreshAccessTokenError";
         }
       }
+      return token;
     },
-
     async session({ session, token }) {
-      if (token.profile) {
-        session.user = token.profile;
-      }
-
+      session.user = token.profile;
       session.error = token.error;
-      session.accessToken = token.access_token;
+      session.accessToken = token.accessToken;
       return session;
     },
   },
 };
 
-const handler = (req, res) => NextAuth(req, res, authOptions);
+const handler = NextAuth(authOptions);
+
 export { handler as GET, handler as POST };
