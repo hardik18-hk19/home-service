@@ -2,7 +2,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import Header from "./_components/Header";
 import NextAuthSessionProvider from "./provider";
-import { Toaster } from "@/@/components/ui/sonner";
+import { Toaster } from "/components/ui/sonner";
 
 const inter = Outfit({ subsets: ["latin"] });
 

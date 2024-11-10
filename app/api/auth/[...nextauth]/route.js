@@ -1,12 +1,29 @@
-// app/api/auth/[...nextauth]/route.js
-import NextAuth from 'next-auth';
-import { authOptions } from '@/lib/auth'; // Ensure this path is correct
+import NextAuth from "next-auth/next";
 
-// Handle GET and POST requests
-export async function GET(req) {
-  return NextAuth(req, authOptions);
-}
 
-export async function POST(req) {
-  return NextAuth(req, authOptions);
-}
+export const authOptions = {
+    providers: [
+    {
+        id: "descope",
+        name: "Descope",
+        type: "oauth",
+        wellKnown: `https://api.descope.com/P2jTnUl3jDsd7UnKVF2r8hMFevDB/.well-known/openid-configuration`,
+        authorization: { params: { scope: "openid email profile" } },
+        idToken: true,
+        clientId: process.env.DESCOPE_CLIENT_ID,
+        clientSecret: "<Descope Access Key>",
+        checks: ["pkce", "state"],
+        profile(profile) {
+            return {
+                id: profile.sub,
+                name: profile.name,
+                email: profile.email,
+                image: profile.picture,
+            }
+        },
+    }]
+}  
+
+
+const handler = NextAuth(authOptions)
+export { handler as GET, handler as POST }

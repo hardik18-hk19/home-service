@@ -8,10 +8,10 @@ import {
   SheetTrigger,
   SheetClose,
   SheetFooter,
-} from "@/@/components/ui/sheet";
+} from "/components/ui/sheet";
 
 import SingleDatePicker from "./Calendar";
-import { Button } from "@/@/components/ui/button";
+import { Button } from "/components/ui/button";
 import GlobalApi from "../../../_services/GlobalApi";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";

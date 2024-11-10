@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "@/@/components/ui/button";
+import { Button } from "/components/ui/button";
 import { NotebookPen } from "lucide-react";
 import GlobalApi from "../../../_services/GlobalApi";
 import Image from "next/image";

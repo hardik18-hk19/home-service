@@ -1,5 +1,5 @@
 "use client";
-import GlobalApi from "@/app/_services/GlobalApi";
+import GlobalApi from "/app/_services/GlobalApi";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

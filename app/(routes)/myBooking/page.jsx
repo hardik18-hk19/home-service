@@ -5,10 +5,10 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/@/components/ui/tabs";
+} from "/components/ui/tabs";
 import BookingHistoryList from "./_component/BookingHistoryList";
 import { useSession } from "next-auth/react";
-import GlobalApi from "@/app/_services/GlobalApi";
+import GlobalApi from "/app/_services/GlobalApi";
 
 function MyBooking() {
   const [selectedTab, setSelectedTab] = useState("Booked");

@@ -1,6 +1,5 @@
 "use client";
 
-
 import BusinessList from "./_components/BusinessList";
 import CategoryList from "./_components/CategoryList";
 import Hero from "./_components/Hero";
