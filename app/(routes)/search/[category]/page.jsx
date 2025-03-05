@@ -1,9 +1,9 @@
 "use client";
-import BusinessList from "@/app/_components/BusinessList";
-import GlobalApi from "@/app/_services/GlobalApi";
+import BusinessList from "../../../_components/BusinessList";
+import GlobalApi from "../../../_services/GlobalApi";
 import React, { useEffect, useState } from "react";
 
-function BusinessByCategory({params}) {
+function BusinessByCategory({ params }) {
   const [businessList, setBusinessList] = useState([]);
   useEffect(() => {
     console.log(params);
